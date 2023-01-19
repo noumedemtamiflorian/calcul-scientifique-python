@@ -1,22 +1,27 @@
-""" 
-abscices => tableau d'abscice de point connues
-ordonnees => tableau d'ordonnee de point connues
-abscice => abscice dont on recherche sont ordonnee
+"""
+Calcule et retourne le résultat de l'algorithme de Lagrange pour un abscice donné.
+
+Parameters
+----------
+abscices : list
+    Liste des abscices.
+ordonnees : list
+    Liste des ordonnées.
+abscice : int
+    Valeur de l'abscice à laquelle on veut trouver l'ordonnée correspondante.
+
+Returns
+-------
+str
+    Une chaîne de caractères contenant le résultat de l'algorithme de Lagrange.
 
 """
-def lagrange(abscices, ordonnees, abscice):
+def optimised_lagrange(abscices, ordonnees, abscice):
     sum = 0
     for i in range(0, len(abscices)):
         product = 1
-        k = 0
-        while k < len(abscices):
+        for k in range(len(abscices)):
             if k != i:
                 product *= (abscice - abscices[k]) / (abscices[i] - abscices[k])
-            k = k + 1
         sum += ordonnees[i] * product
-    return "abscice "+str(abscice)+" a pour ordonnee "+str(sum)
-
-def funct(x):
-    return (pow(x,3)-13*pow(x,2)+69*x-92)*(1/5)
-
-print(funct(1), funct(3), funct(4), funct(6))
+    return f"abscice {abscice} a pour ordonnee {sum}"
